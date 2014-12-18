@@ -18,7 +18,7 @@ describe('rework-class-prefix', function() {
   it('ignores a classes given in except', function() {
     var out = rework(fixture('filter.css')).use(
       classPrfx('prfx-',
-        { except: /^is-/ }
+        { not: /^is-/ }
       )).toString().trim();
     var expected = fixture('filter.css.expected');
     assert.equal(out, expected);

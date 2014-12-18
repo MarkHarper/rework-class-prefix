@@ -19,7 +19,7 @@ module.exports = function classPrefix(prefix, options) {
   options = options || {};
 
   function isIgnoredClass(klass) {
-    return classMatchesTest(klass, options.except);
+    return classMatchesTest(klass, options.not);
   }
 
   return function classPrefix(styling) {

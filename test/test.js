@@ -15,12 +15,25 @@ describe('rework-class-prefix', function() {
     assert.equal(output, expected);
   });
 
-  it('ignores a classes given in except', function() {
-    var out = rework(fixture('filter.css')).use(
-      classPrfx('prfx-',
-        { not: /^is-/ }
-      )).toString().trim();
+  describe('options.not', function() {
+    var original = fixture('filter.css');
     var expected = fixture('filter.css.expected');
-    assert.equal(out, expected);
+    it('ignores a classes matching a "not" RegExp', function() {
+      var out = rework(original).use(
+        classPrfx('prfx-',
+          { not: /^is-/ }
+        )).toString().trim();
+      assert.equal(out, expected);
+    });
+
+    it('accepts regular expression as a string for "not"', function() {
+      var out = rework(original).use(
+        classPrfx('prfx-',
+          { not: '/^is-/' }
+        )).toString().trim();
+      assert.equal(out, expected);
+    });
+
   });
+
 });

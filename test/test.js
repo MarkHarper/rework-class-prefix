@@ -15,6 +15,13 @@ describe('rework-class-prefix', function() {
     assert.equal(output, expected);
   });
 
+  it('ignores already prefixed classes', function() {
+    var output = rework(fixture('prefixed.css')).use(classPrfx('prfx-')).toString().trim();
+    var expected = fixture('prefixed.css.expected');
+
+    assert.equal(output, expected);
+  })
+
   describe('options.not', function() {
     var original = fixture('filter.css');
     var expected = fixture('filter.css.expected');

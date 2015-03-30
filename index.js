@@ -39,6 +39,10 @@ function notTester(matcher) {
 module.exports = function classPrefix(prefix, options) {
   options = options || {};
 
+  function isPrefixed(klass) {
+    return (klass.indexOf(prefix) === 0);
+  }
+
   var isIgnoredClass = notTester(options.not);
 
   return function classPrefix(styling) {
@@ -56,7 +60,7 @@ module.exports = function classPrefix(prefix, options) {
         var classes = selector.split('.');
 
         return classes.map(function(klass){
-          if(isIgnoredClass(klass) || klass.trim().length === 0) {
+          if(klass.trim().length === 0 || isIgnoredClass(klass) || isPrefixed(klass)) {
             return klass;
           }
           return prefix + klass;
